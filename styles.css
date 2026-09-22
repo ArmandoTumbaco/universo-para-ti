@@ -1,0 +1,1164 @@
+
+/* Configuración general */
+
+:root {
+    --background: #101119;
+    --background-secondary: #171923;
+
+    --text-primary: #f3efe8;
+    --text-secondary: #aaa9b8;
+    --text-muted: #777786;
+
+    --accent: #e7d9a8;
+
+    --button-border: rgba(255, 255, 255, 0.14);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    min-height: 100%;
+    background: var(--background);
+}
+
+body {
+    width: 100%;
+
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    overflow-x: hidden;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 45%,
+            #1b1d2a 0%,
+            #101119 65%,
+            #0b0c12 100%
+        );
+
+    color: var(--text-primary);
+
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+/* Fondo de estrellas */
+
+#starsCanvas {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    z-index: 0;
+
+    pointer-events: none;
+}
+
+/* Contenedor principal */
+
+.experience {
+    position: relative;
+
+    z-index: 1;
+
+    width: 100%;
+    max-width: 1200px;
+
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    margin: 0 auto;
+
+    padding: 26px 24px 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Encabezado */
+
+.header {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 8px;
+
+    width: 100%;
+
+    text-align: center;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.header-title {
+    font-size: 10px;
+    font-weight: 600;
+
+    letter-spacing: 4px;
+
+    color: #dad9e2;
+}
+
+.header-subtitle {
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    color: var(--text-muted);
+}
+
+/* Control de música */
+
+.music-button {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 50%;
+
+    background: rgba(15, 16, 25, 0.75);
+
+    color: var(--text-secondary);
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    transition:
+        color 250ms ease,
+        border-color 250ms ease,
+        background 250ms ease;
+}
+
+.music-button:hover,
+.music-button.is-playing {
+    color: #f5e8b9;
+
+    border-color: rgba(245, 232, 185, 0.5);
+
+    background: rgba(245, 232, 185, 0.08);
+}
+
+.music-button.is-playing {
+    animation: musicPulse 2s ease-in-out infinite;
+}
+
+@keyframes musicPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 rgba(245, 232, 185, 0);
+    }
+
+    50% {
+        box-shadow: 0 0 15px rgba(245, 232, 185, 0.2);
+    }
+}
+
+/* Escena */
+
+.scene {
+    width: 100%;
+    max-width: 850px;
+
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 20px;
+
+    padding: 24px 0;
+
+    text-align: center;
+
+    opacity: 1;
+
+    transition:
+        opacity 350ms ease,
+        transform 350ms ease;
+}
+
+.scene.is-changing {
+    opacity: 0;
+
+    transform: translateY(8px);
+}
+
+/* Textos */
+
+.scene-content {
+    width: 100%;
+    max-width: 650px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 17px;
+}
+
+.scene-label {
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 9px;
+    font-weight: 500;
+
+    letter-spacing: 3px;
+
+    color: var(--text-muted);
+}
+
+.scene-label:empty,
+.scene-description:empty {
+    display: none;
+}
+
+.scene-title {
+    max-width: 650px;
+
+    color: var(--text-primary);
+
+    font-size: clamp(25px, 4vw, 39px);
+    font-weight: normal;
+
+    line-height: 1.25;
+
+    text-wrap: balance;
+}
+
+.scene-title.is-name {
+    font-size: clamp(42px, 6vw, 65px);
+
+    font-style: italic;
+}
+
+.scene-description {
+    max-width: 530px;
+
+    color: var(--text-secondary);
+
+    font-size: clamp(14px, 1.8vw, 17px);
+
+    line-height: 1.8;
+
+    text-wrap: balance;
+}
+
+/* Mensajes de las flores */
+
+.flower-message {
+    display: none;
+
+    max-width: 360px;
+
+    color: #f5e8bd;
+
+    font-size: 15px;
+
+    line-height: 1.5;
+}
+
+.flower-message.visible {
+    display: block;
+
+    padding: 9px 17px;
+
+    border: 1px solid rgba(231, 217, 168, 0.26);
+
+    border-radius: 18px;
+
+    background: rgba(21, 24, 31, 0.91);
+
+    box-shadow:
+        0 0 22px rgba(231, 217, 168, 0.07);
+
+    animation: messageAppear 350ms ease both;
+}
+
+.flower-message.is-special {
+    color: #ffedaa;
+
+    border-color: rgba(255, 220, 125, 0.6);
+
+    box-shadow:
+        0 0 28px rgba(255, 215, 96, 0.18);
+}
+
+@keyframes messageAppear {
+    from {
+        opacity: 0;
+
+        transform: translateY(8px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Área de animaciones */
+
+.scene-visual {
+    position: relative;
+
+    width: min(100%, 400px);
+    height: 260px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estrella principal */
+
+.main-star {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: #fff4d4;
+
+    box-shadow:
+        0 0 8px 3px rgba(255, 235, 172, 0.7),
+        0 0 22px 8px rgba(255, 235, 172, 0.24);
+
+    opacity: 0;
+
+    transform: translate(-50%, -50%);
+
+    transition: opacity 500ms ease;
+}
+
+.main-star::before,
+.main-star::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    background: rgba(255, 245, 219, 0.65);
+}
+
+.main-star::before {
+    width: 1px;
+    height: 36px;
+}
+
+.main-star::after {
+    width: 36px;
+    height: 1px;
+}
+
+.main-star.visible {
+    opacity: 1;
+
+    animation: starPulse 3s ease-in-out infinite;
+}
+
+@keyframes starPulse {
+    0%, 100% {
+        opacity: 0.45;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Corazón de estrellas */
+
+.constellation {
+    position: absolute;
+
+    width: min(100%, 310px);
+    height: 250px;
+
+    overflow: visible;
+
+    opacity: 0;
+
+    transform: scale(0.92);
+
+    transition:
+        opacity 600ms ease,
+        transform 900ms ease;
+}
+
+.constellation.visible {
+    opacity: 1;
+
+    transform: scale(1);
+}
+
+/* Fotografía dentro del corazón */
+
+.heart-photo-group {
+    opacity: 0;
+
+    transition: opacity 1.2s ease;
+}
+
+.constellation.photo-visible .heart-photo-group {
+    opacity: 0.82;
+}
+
+/* Contorno del corazón */
+
+#heartPath {
+    fill: none;
+
+    stroke-dasharray: var(--heart-length, 1000);
+
+    stroke-dashoffset: var(--heart-length, 1000);
+}
+
+.constellation.visible #heartPath {
+    animation: drawHeart 2.8s ease forwards;
+}
+
+@keyframes drawHeart {
+    from {
+        stroke-dashoffset: var(--heart-length);
+    }
+
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* Estrellas del corazón */
+
+#heartStars circle {
+    opacity: 0;
+}
+
+.constellation.visible #heartStars circle {
+    animation: appearStar 1s ease forwards;
+}
+
+@keyframes appearStar {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Planeta */
+
+.planet-system {
+    position: relative;
+
+    width: 220px;
+    height: 235px;
+
+    opacity: 0;
+
+    transform: translateY(20px) scale(0.85);
+
+    transition:
+        opacity 800ms ease,
+        transform 900ms ease;
+
+    pointer-events: none;
+}
+
+.planet-system.visible {
+    opacity: 1;
+
+    transform: translateY(0) scale(1);
+}
+
+.planet {
+    position: absolute;
+
+    bottom: 5px;
+    left: 50%;
+
+    width: 200px;
+    height: 200px;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 32% 22%,
+            #707a56 0%,
+            #424e3b 22%,
+            #222c26 56%,
+            #10191c 82%,
+            #0b1017 100%
+        );
+
+    box-shadow:
+        inset -25px -20px 45px rgba(0, 0, 0, 0.5),
+        inset 9px 7px 20px rgba(236, 237, 167, 0.08),
+        0 0 35px rgba(114, 137, 100, 0.08);
+
+    z-index: 2;
+}
+
+.planet-light {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse at 26% 15%,
+            rgba(251, 244, 185, 0.13),
+            transparent 58%
+        );
+}
+
+.planet-shadow {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse at 100% 100%,
+            rgba(0, 0, 0, 0.38),
+            transparent 68%
+        );
+}
+
+.planet-glow {
+    position: absolute;
+
+    bottom: 0;
+    left: 50%;
+
+    width: 220px;
+    height: 190px;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 50px rgba(156, 161, 107, 0.07);
+
+    z-index: 0;
+}
+
+/* Flores sobre el planeta */
+
+.flowers {
+    position: absolute;
+
+    bottom: 150px;
+    left: 50%;
+
+    width: 200px;
+    height: 110px;
+
+    transform: translateX(-50%);
+
+    z-index: 5;
+
+    pointer-events: none;
+}
+
+/* Flor interactiva */
+
+.flower {
+    position: absolute;
+
+    bottom: 0;
+
+    width: 30px;
+    height: var(--flower-height, 85px);
+
+    display: block;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    pointer-events: auto;
+
+    transform-origin: bottom center;
+
+    transform:
+        translateX(-50%)
+        rotate(var(--flower-rotation, 0deg));
+
+    animation: flowerAppear 650ms ease both;
+
+    animation-delay: var(--flower-delay, 0ms);
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+.flower:not(.is-interactive) {
+    pointer-events: none;
+}
+
+.flower-inner {
+    position: absolute;
+
+    inset: 0;
+
+    display: block;
+
+    transform-origin: bottom center;
+
+    animation:
+        flowerSway 4s ease-in-out infinite alternate;
+
+    animation-delay: var(--flower-delay, 0ms);
+}
+
+/* Tallo */
+
+.stem {
+    position: absolute;
+
+    bottom: 0;
+    left: 50%;
+
+    width: 3px;
+
+    height: calc(var(--flower-height) - 14px);
+
+    transform: translateX(-50%);
+
+    border-radius: 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #344724,
+            #718d49,
+            #293b24
+        );
+}
+
+/* Hojas */
+
+.leaf {
+    position: absolute;
+
+    width: 16px;
+    height: 8px;
+
+    background: #67864a;
+
+    border-radius: 100% 0 100% 0;
+}
+
+.leaf-left {
+    left: 0;
+    bottom: 24px;
+
+    transform: rotate(-32deg);
+}
+
+.leaf-right {
+    right: 0;
+    bottom: 36px;
+
+    transform: rotate(140deg);
+}
+
+/* Cabeza de la flor */
+
+.flower-head {
+    position: absolute;
+
+    left: 50%;
+    top: -3px;
+
+    width: 28px;
+    height: 28px;
+
+    transform: translateX(-50%);
+
+    filter:
+        drop-shadow(
+            0 0 3px rgba(255, 207, 62, 0.2)
+        );
+
+    transition:
+        transform 300ms ease,
+        filter 300ms ease;
+}
+
+/* Pétalos */
+
+.petal {
+    position: absolute;
+
+    left: 9px;
+    top: 8px;
+
+    width: 10px;
+    height: 14px;
+
+    border-radius: 65% 65% 45% 45%;
+
+    background:
+        radial-gradient(
+            circle at 45% 25%,
+            #fff4a5,
+            #f2c644 68%,
+            #cb9630
+        );
+
+    transform-origin: 50% 80%;
+}
+
+.flower-center {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 7px;
+    height: 7px;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background: #996c1f;
+
+    box-shadow:
+        inset 0 0 2px #f9d568;
+}
+
+/* Animaciones de flores */
+
+@keyframes flowerAppear {
+    from {
+        opacity: 0;
+
+        translate: 0 12px;
+
+        scale: 0.65;
+    }
+
+    to {
+        opacity: 1;
+
+        translate: 0 0;
+
+        scale: 1;
+    }
+}
+
+@keyframes flowerSway {
+    from {
+        rotate: -2deg;
+    }
+
+    to {
+        rotate: 2deg;
+    }
+}
+
+/* Iluminación al tocar una flor */
+
+.flower.is-interactive:hover .flower-head,
+.flower.is-interactive:focus-visible .flower-head {
+    transform:
+        translateX(-50%)
+        translateY(-7px)
+        scale(1.22);
+
+    filter:
+        brightness(1.4)
+        drop-shadow(
+            0 0 12px rgba(255, 222, 90, 0.85)
+        );
+}
+
+/* Flor seleccionada */
+
+.flower.is-selected .flower-head {
+    transform:
+        translateX(-50%)
+        translateY(-8px)
+        scale(1.3);
+
+    filter:
+        brightness(1.4)
+        drop-shadow(
+            0 0 14px rgba(255, 221, 100, 0.9)
+        );
+}
+
+/* Flor central elegida */
+
+.flower.is-blooming .flower-head {
+    animation: specialBloom 1s ease forwards;
+}
+
+@keyframes specialBloom {
+    0% {
+        transform:
+            translateX(-50%)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translateX(-50%)
+            translateY(-12px)
+            scale(1.65);
+
+        filter:
+            brightness(1.7)
+            drop-shadow(
+                0 0 25px rgba(255, 220, 90, 1)
+            );
+    }
+
+    100% {
+        transform:
+            translateX(-50%)
+            translateY(-7px)
+            scale(1.3);
+
+        filter:
+            brightness(1.35)
+            drop-shadow(
+                0 0 14px rgba(255, 220, 90, 0.9)
+            );
+    }
+}
+
+/* Navegación */
+
+.navigation {
+    position: relative;
+
+    width: 100%;
+    max-width: 460px;
+
+    min-height: 64px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.next-button,
+.back-button {
+    font-family: Arial, Helvetica, sans-serif;
+
+    color: var(--text-primary);
+
+    cursor: pointer;
+
+    transition:
+        background 200ms ease,
+        border-color 200ms ease,
+        transform 200ms ease;
+}
+
+.next-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 13px;
+
+    min-width: 125px;
+
+    padding: 12px 23px;
+
+    border: 1px solid var(--button-border);
+    border-radius: 40px;
+
+    background: rgba(10, 11, 18, 0.75);
+
+    font-size: 12px;
+}
+
+.next-button:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.08);
+
+    border-color: rgba(255, 255, 255, 0.32);
+
+    transform: translateY(-2px);
+}
+
+.next-button span {
+    color: var(--accent);
+}
+
+.next-button:disabled {
+    opacity: 0.4;
+
+    cursor: not-allowed;
+}
+
+.back-button {
+    position: absolute;
+
+    left: 0;
+
+    padding: 10px 5px;
+
+    border: none;
+
+    background: transparent;
+
+    color: var(--text-muted);
+
+    font-size: 12px;
+}
+
+.back-button:hover:not(:disabled) {
+    color: var(--text-primary);
+}
+
+.back-button:disabled {
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+button:focus-visible {
+    outline: 2px solid var(--accent);
+
+    outline-offset: 4px;
+}
+
+/* Pie de página */
+
+.footer {
+    width: 100%;
+    max-width: 470px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 13px;
+
+    padding-top: 14px;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.scene-counter {
+    color: var(--text-secondary);
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+}
+
+.scene-footer {
+    color: var(--text-muted);
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+}
+
+.progress {
+    width: 150px;
+    height: 2px;
+
+    border-radius: 5px;
+
+    overflow: hidden;
+
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+
+    background: var(--accent);
+
+    transition: width 500ms ease;
+}
+
+/* Dispositivos móviles */
+
+@media (max-width: 600px) {
+
+    .experience {
+        padding: 25px 16px 18px;
+    }
+
+    .header {
+        padding: 0 32px;
+    }
+
+    .header-title {
+        font-size: 9px;
+
+        letter-spacing: 3px;
+    }
+
+    .header-subtitle {
+        font-size: 7px;
+    }
+
+    .music-button {
+        right: -4px;
+    }
+
+    .scene {
+        gap: 14px;
+
+        padding: 18px 0;
+    }
+
+    .scene-content {
+        gap: 14px;
+    }
+
+    .scene-title {
+        font-size: 26px;
+    }
+
+    .scene-title.is-name {
+        font-size: 46px;
+    }
+
+    .scene-description {
+        max-width: 320px;
+
+        font-size: 14px;
+
+        line-height: 1.7;
+    }
+
+    .flower-message {
+        max-width: 300px;
+
+        font-size: 13px;
+    }
+
+    .scene-visual {
+        height: 230px;
+    }
+
+    .planet-system.visible {
+        transform: translateY(0) scale(0.85);
+    }
+
+    .navigation {
+        min-height: 65px;
+    }
+
+    .next-button {
+        min-width: 115px;
+
+        padding: 12px 17px;
+    }
+
+    .back-button {
+        font-size: 11px;
+    }
+}
+
+/* Pantallas de poca altura */
+
+@media (max-height: 650px) {
+
+    .experience {
+        padding-top: 15px;
+        padding-bottom: 10px;
+    }
+
+    .scene {
+        gap: 8px;
+
+        padding: 10px 0;
+    }
+
+    .scene-visual {
+        height: 190px;
+    }
+
+    .planet-system.visible {
+        transform: translateY(15px) scale(0.67);
+    }
+
+    .constellation {
+        height: 170px;
+    }
+}
+
+/* Accesibilidad */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+
+        transition-duration: 0.01ms !important;
+    }
+
+    .constellation.visible #heartPath {
+        stroke-dashoffset: 0;
+    }
+
+    .constellation.visible #heartStars circle {
+        opacity: 1;
+    }
+}
